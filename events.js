@@ -50,6 +50,17 @@ EventEmitter.prototype.emit = function(type) {
   if (!this._events)
     this._events = {};
 
+  // Loop through the *_all* functions and invoke them.
+  if (this._all) {
+    var l = arguments.length;
+    var args = new Array(l - 1);
+    for (var i = 1; i < l; i++) args[i - 1] = arguments[i];
+    for (i = 0, l = this._all.length; i < l; i++) {
+      this.event = type;
+      this._all[i].apply(this, [type].concat(args));
+    }
+  }
+
   // If there is no 'error' event listener then throw.
   if (type === 'error') {
     if (!this._events.error ||
@@ -167,6 +178,39 @@ EventEmitter.prototype.once = function(type, listener) {
 
   return this;
 };
+
+EventEmitter.prototype.onAny = function(listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+  if(!this._all) {
+    this._all = [];
+  }
+
+  // Add the function to the event listener collection.
+  this._all.push(listener);
+  return this;
+}
+
+// emits a 'removeListenerAny' event if the listener was removed
+EventEmitter.prototype.offAny = function(listener) {
+  var i = 0, l = 0, fns;
+  if (listener && this._all && this._all.length > 0) {
+    fns = this._all;
+    for(i = 0, l = fns.length; i < l; i++) {
+      if(listener === fns[i]) {
+        fns.splice(i, 1);
+        this.emit('removeListenerAny', listener);
+        return this;
+      }
+    }
+  } else {
+    fns = this._all;
+    for(i = 0, l = fns.length; i < l; i++)
+      this.emit('removeListenerAny', fns[i]);
+    this._all = [];
+  }
+  return this;
+}
 
 // emits a 'removeListener' event iff the listener was removed
 EventEmitter.prototype.removeListener = function(type, listener) {
