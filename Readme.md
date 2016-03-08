@@ -1,6 +1,6 @@
-# events [![Build Status](https://travis-ci.org/Gozala/events.png?branch=master)](https://travis-ci.org/Gozala/events)
+# events
 
-Node's event emitter for all engines.
+Event emitter loosely based on Node's implementation with added support for event forwarding and subscribing to all events.
 
 ## Install ##
 
@@ -11,9 +11,5 @@ npm install events
 ## Require ##
 
 ```javascript
-var EventEmitter = require('events').EventEmitter
+import EventEmitter from 'events';
 ```
-
-## Usage ##
-
-See the [node.js event emitter docs](http://nodejs.org/api/events.html)
