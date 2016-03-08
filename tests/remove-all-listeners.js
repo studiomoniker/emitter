@@ -19,9 +19,11 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var common = require('./common');
-var assert = require('assert');
-var events = require('../');
+import common from './common';
+import assert from 'assert';
+import EventEmitter from '../';
+
+console.log('remove all');
 
 var after_checks = [];
 after(function() {
@@ -44,7 +46,7 @@ function expect(expected) {
 
 function listener() {}
 
-var e1 = new events.EventEmitter();
+var e1 = new EventEmitter();
 e1.on('foo', listener);
 e1.on('bar', listener);
 e1.on('baz', listener);
@@ -68,7 +70,7 @@ assert.deepEqual(bazListeners, [listener, listener]);
 assert.notEqual(e1.listeners('bar'), barListeners);
 assert.notEqual(e1.listeners('baz'), bazListeners);
 
-var e2 = new events.EventEmitter();
+var e2 = new EventEmitter();
 e2.on('foo', listener);
 e2.on('bar', listener);
 // expect LIFO order
@@ -76,5 +78,6 @@ e2.on('removeListener', expect(['foo', 'bar', 'removeListener']));
 e2.on('removeListener', expect(['foo', 'bar']));
 e2.removeAllListeners();
 console.error(e2);
+console.log(e2.listeners('foo'));
 assert.deepEqual([], e2.listeners('foo'));
 assert.deepEqual([], e2.listeners('bar'));

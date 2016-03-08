@@ -20,10 +20,9 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var assert = require('assert');
-var EventEmitter = require('../').EventEmitter;
-
-var e = new EventEmitter;
+import assert from 'assert';
+import EventEmitter from '../';
+var e = new EventEmitter();
 var fl;  // foo listeners
 
 fl = e.listeners('foo');
@@ -33,7 +32,7 @@ assert.deepEqual(e._events, {});
 
 e.on('foo', assert.fail);
 fl = e.listeners('foo');
-assert(e._events.foo === assert.fail);
+assert(e._events.foo[0] === assert.fail);
 assert(Array.isArray(fl));
 assert(fl.length === 1);
 assert(fl[0] === assert.fail);

@@ -19,9 +19,9 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var assert = require('assert');
-var EventEmitter = require('../').EventEmitter;
-var util = require('util');
+import assert from 'assert';
+import EventEmitter from '../';
+import util from 'util';
 
 util.inherits(MyEE, EventEmitter);
 

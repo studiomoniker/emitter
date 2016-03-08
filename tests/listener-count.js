@@ -19,10 +19,10 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var assert = require('assert');
-var EventEmitter = require('../');
-
+import assert from 'assert';
+import EventEmitter from '../';
 var emitter = new EventEmitter();
+
 emitter.on('foo', function() {});
 emitter.on('foo', function() {});
 emitter.on('baz', function() {});

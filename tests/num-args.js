@@ -19,10 +19,10 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var assert = require('assert');
-var events = require('../');
+import assert from 'assert';
+import EventEmitter from '../';
 
-var e = new events.EventEmitter(),
+var e = new EventEmitter(),
     num_args_emited = [];
 
 e.on('numArgs', function() {

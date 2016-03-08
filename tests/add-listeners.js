@@ -19,10 +19,9 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var assert = require('assert');
-var events = require('../');
-
-var e = new events.EventEmitter();
+import assert from 'assert';
+import EventEmitter from '../';
+var e = new EventEmitter();
 
 var events_new_listener_emited = [];
 var listeners_new_listener_emited = [];
@@ -51,11 +50,6 @@ e.once('foo', foo);
 console.log('start');
 
 e.emit('hello', 'a', 'b');
-
-
-// just make sure that this doesn't throw:
-var f = new events.EventEmitter();
-f.setMaxListeners(0);
 
 assert.deepEqual(['hello', 'foo'], events_new_listener_emited);
 assert.deepEqual([hello, foo], listeners_new_listener_emited);

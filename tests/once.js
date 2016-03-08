@@ -19,10 +19,10 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-var assert = require('assert');
-var events = require('../');
+import assert from 'assert';
+import EventEmitter from '../';
 
-var e = new events.EventEmitter();
+var e = new EventEmitter();
 var times_hello_emited = 0;
 
 e.once('hello', function(a, b) {
@@ -45,11 +45,13 @@ e.emit('foo');
 var times_recurse_emitted = 0;
 
 e.once('e', function() {
+  console.log('first called');
 	e.emit('e');
 	times_recurse_emitted++;
 });
 
 e.once('e', function() {
+  console.log('second called');
 	times_recurse_emitted++;
 });
 
