@@ -65,7 +65,7 @@ export default class Emitter {
   }
 
   onAny(listener) {
-    this._getAnyListeners().push(listener);
+    this._getAnyListeners(true).push(listener);
     return this;
   }
 

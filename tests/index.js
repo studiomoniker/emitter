@@ -20,3 +20,4 @@ require('./once.js');
 require('./subclass.js');
 require('./remove-all-listeners.js');
 require('./remove-listeners.js');
+require('./any.js');
