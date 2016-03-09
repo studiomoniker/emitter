@@ -21,8 +21,8 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import assert from 'assert';
-import EventEmitter from '../';
-var e = new EventEmitter();
+import Emitter from '../';
+var e = new Emitter();
 var fl;  // foo listeners
 
 fl = e.listeners('foo');

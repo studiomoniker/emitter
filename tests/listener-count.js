@@ -20,8 +20,8 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import assert from 'assert';
-import EventEmitter from '../';
-var emitter = new EventEmitter();
+import Emitter from '../';
+var emitter = new Emitter();
 
 emitter.on('foo', function() {});
 emitter.on('foo', function() {});
@@ -29,7 +29,7 @@ emitter.on('baz', function() {});
 // Allow any type
 emitter.on(123, function() {});
 
-assert.strictEqual(EventEmitter.listenerCount(emitter, 'foo'), 2);
+assert.strictEqual(Emitter.listenerCount(emitter, 'foo'), 2);
 assert.strictEqual(emitter.listenerCount('foo'), 2);
 assert.strictEqual(emitter.listenerCount('bar'), 0);
 assert.strictEqual(emitter.listenerCount('baz'), 1);

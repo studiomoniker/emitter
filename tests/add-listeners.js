@@ -20,8 +20,8 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import assert from 'assert';
-import EventEmitter from '../';
-var e = new EventEmitter();
+import Emitter from '../';
+var e = new Emitter();
 
 var events_new_listener_emited = [];
 var listeners_new_listener_emited = [];

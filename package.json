@@ -1,8 +1,8 @@
 {
-  "name": "@studiomoniker/events",
-  "id": "events",
+  "name": "@studiomoniker/emitter",
+  "id": "emitter",
   "version": "1.1.0",
-  "description": "Node's event emitter for all engines.",
+  "description": "ES6 event emitter loosely based on Node's implementation with added support for event forwarding and subscribing to all events.",
   "keywords": [
     "events",
     "eventEmitter",
@@ -12,13 +12,13 @@
   "author": "Jonathan Puckey (http://studiomoniker.com)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/studiomoniker/events.git",
-    "web": "https://github.com/studiomoniker/events"
+    "url": "git://github.com/studiomoniker/emitter.git",
+    "web": "https://github.com/studiomoniker/emitter"
   },
   "bugs": {
-    "url": "http://github.com/studiomoniker/events/issues/"
+    "url": "http://github.com/studiomoniker/emitter/issues/"
   },
-  "main": "./events.js",
+  "main": "./emitter.js",
   "engines": {
     "node": ">=0.4.x"
   },

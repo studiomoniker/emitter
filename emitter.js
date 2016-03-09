@@ -1,8 +1,4 @@
-export default class EventEmitter {
-  constructor() {
-    this._events = {};
-  }
-
+export default class Emitter {
   _getEvents() {
     let events = this._events;
     if (!events)
@@ -11,7 +7,7 @@ export default class EventEmitter {
   }
 
   _getListeners(type, createIfMissing) {
-    let events = this._getEvents();
+    const events = this._getEvents();
     let listeners = events[type];
     if (createIfMissing && !listeners)
       listeners = events[type] = [];
@@ -38,12 +34,12 @@ export default class EventEmitter {
         listener.apply(that, args);
       });
     }
-    let that = this;
-    let args = Array.prototype.slice.call(arguments, 1);
-    let listeners = this._getListeners(type);
+    const that = this;
+    const args = Array.prototype.slice.call(arguments, 1);
+    const listeners = this._getListeners(type);
     // If there is no 'error' event listener then throw.
     if (type === 'error' && !listeners) {
-      var error = arguments[1];
+      const error = arguments[1];
       if (error instanceof Error) {
         throw error; // Unhandled 'error' event
       }
@@ -92,8 +88,9 @@ export default class EventEmitter {
   }
 
   removeAllListeners(type) {
+    let events = this._getEvents();
     if (!type) {
-      Object.keys(this._getEvents())
+      Object.keys(events)
         .forEach(type => this.removeAllListeners(type));
       return this;
     } else {
@@ -102,12 +99,13 @@ export default class EventEmitter {
       listeners
         .slice()
         .forEach(listener => this.off(type, listener));
+      delete events[type];
     }
     return this;
   }
 
   listenerCount(type) {
-    return EventEmitter.listenerCount(this, type);
+    return Emitter.listenerCount(this, type);
   }
 
   forwardEvents(emitter) {
@@ -122,17 +120,16 @@ export default class EventEmitter {
   }
 }
 
-EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.prototype.addListener = EventEmitter.prototype.on;
-EventEmitter.prototype.removeListener = EventEmitter.prototype.off;
+Emitter.Emitter = Emitter;
+Emitter.prototype.addListener = Emitter.prototype.on;
+Emitter.prototype.removeListener = Emitter.prototype.off;
 
 function removeFromArray(array, object) {
   if (!array)
     return;
   const index = array.indexOf(object);
-  if (index !== -1) {
+  const exists = index !== -1;
+  if (exists)
     array.splice(index, 1);
-  }
-  return index !== -1;
+  return exists;
 }

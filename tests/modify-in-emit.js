@@ -20,11 +20,11 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import assert from 'assert';
-import EventEmitter from '../';
+import Emitter from '../';
 
 var callbacks_called = [];
 
-var e = new EventEmitter();
+var e = new Emitter();
 
 function callback1() {
   callbacks_called.push('callback1');

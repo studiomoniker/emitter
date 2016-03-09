@@ -20,16 +20,16 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import assert from 'assert';
-import EventEmitter from '../';
+import Emitter from '../';
 import util from 'util';
 
-util.inherits(MyEE, EventEmitter);
+util.inherits(MyEE, Emitter);
 
 function MyEE(cb) {
   this.once(1, cb);
   this.emit(1);
   this.removeAllListeners();
-  EventEmitter.call(this);
+  Emitter.call(this);
 }
 
 var called = false;
@@ -38,7 +38,7 @@ var myee = new MyEE(function() {
 });
 
 
-util.inherits(ErrorEE, EventEmitter);
+util.inherits(ErrorEE, Emitter);
 function ErrorEE() {
   this.emit('error', new Error('blerg'));
 }

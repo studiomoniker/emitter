@@ -21,7 +21,7 @@
 
 import common from './common';
 import assert from 'assert';
-import EventEmitter from '../';
+import Emitter from '../';
 
 console.log('remove all');
 
@@ -46,7 +46,7 @@ function expect(expected) {
 
 function listener() {}
 
-var e1 = new EventEmitter();
+var e1 = new Emitter();
 e1.on('foo', listener);
 e1.on('bar', listener);
 e1.on('baz', listener);
@@ -70,7 +70,7 @@ assert.deepEqual(bazListeners, [listener, listener]);
 assert.notEqual(e1.listeners('bar'), barListeners);
 assert.notEqual(e1.listeners('baz'), bazListeners);
 
-var e2 = new EventEmitter();
+var e2 = new Emitter();
 e2.on('foo', listener);
 e2.on('bar', listener);
 // expect LIFO order

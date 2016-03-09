@@ -20,9 +20,9 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import assert from 'assert';
-import EventEmitter from '../';
+import Emitter from '../';
 
-var e = new EventEmitter();
+var e = new Emitter();
 var times_hello_emited = 0;
 
 e.once('hello', function(a, b) {

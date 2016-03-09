@@ -21,7 +21,7 @@
 
 import common from './common';
 import assert from 'assert';
-import EventEmitter from '../';
+import Emitter from '../';
 
 var count = 0;
 
@@ -48,7 +48,7 @@ function remove2() {
   assert(0);
 }
 
-var e1 = new EventEmitter();
+var e1 = new Emitter();
 e1.on('hello', listener1);
 e1.on('removeListener', common.mustCall(function(name, cb) {
   assert.equal(name, 'hello');
@@ -57,13 +57,13 @@ e1.on('removeListener', common.mustCall(function(name, cb) {
 e1.removeListener('hello', listener1);
 assert.deepEqual([], e1.listeners('hello'));
 
-var e2 = new EventEmitter();
+var e2 = new Emitter();
 e2.on('hello', listener1);
 e2.on('removeListener', assert.fail);
 e2.removeListener('hello', listener2);
 assert.deepEqual([listener1], e2.listeners('hello'));
 
-var e3 = new EventEmitter();
+var e3 = new Emitter();
 e3.on('hello', listener1);
 e3.on('hello', listener2);
 e3.on('removeListener', common.mustCall(function(name, cb) {
@@ -73,7 +73,7 @@ e3.on('removeListener', common.mustCall(function(name, cb) {
 e3.removeListener('hello', listener1);
 assert.deepEqual([listener2], e3.listeners('hello'));
 
-var e4 = new EventEmitter();
+var e4 = new Emitter();
 e4.on('removeListener', common.mustCall(function(name, cb) {
   if (cb !== remove1) return;
   this.removeListener('quux', remove2);
