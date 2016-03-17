@@ -72,10 +72,6 @@ Forward events:
 ```javascript
 import Emitter from '@studiomoniker/emitter';
 
-function logAll(eventName, message) {
-  console.log(`${eventName}: ${message}`);
-}
-
 const emitter = new Emitter();
 const emitter2 = new Emitter();
 
