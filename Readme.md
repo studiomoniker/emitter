@@ -17,7 +17,7 @@ Listening for and emitting events:
 ```javascript
 import Emitter from '@studiomoniker/emitter';
 
-const emitter = new emitter();
+const emitter = new Emitter();
 emitter.on('foo', (message) => console.log(message));
 emitter.emit('foo', 'bar');
 ```
