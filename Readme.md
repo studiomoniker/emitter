@@ -43,15 +43,15 @@ Adding and removing events:
 ```javascript
 import Emitter from '@studiomoniker/emitter';
 
-function foo() {
-  console.log('bar');
+function foo(message) {
+  console.log('foo: ' + message);
 }
 
 const emitter = new Emitter();
 emitter.on('foo', foo);
-emitter.emit('foo', 'bar'); // Logs 'bar'
+emitter.emit('foo', 'bar'); // Logs 'foo: bar'
 emitter.off(foo);
-emitter.emit('foo', 'bar'); // No longer logs bar, because the listener was removed
+emitter.emit('foo', 'bar'); // No longer logs 'foo: bar', because the listener was removed
 ```
 
 Listen to all events:
