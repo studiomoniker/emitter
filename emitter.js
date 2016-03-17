@@ -22,7 +22,7 @@ export default class Emitter {
   }
 
   emit(type) {
-    function emitListeners(listeners, args) {
+    function emitListeners(listeners, type, args) {
       if (!listeners) return;
       listeners.slice().forEach((listener, index) => {
         if (listener._once) {
@@ -31,7 +31,11 @@ export default class Emitter {
           listeners.splice(index, 1);
           listener._fired = true;
         }
-        listener.apply(that, args);
+        if (!!listener.emit) {
+          listener.emit.bind(listener).apply(that, [type, args]);
+        } else {
+          listener.apply(that, args);
+        }
       });
     }
     const that = this;
@@ -45,8 +49,8 @@ export default class Emitter {
       }
       throw TypeError('Uncaught, unspecified "error" event.');
     }
-    emitListeners(listeners, args);
-    emitListeners(this._any, [type, ...args]);
+    emitListeners(listeners, type, args);
+    emitListeners(this._any, type, [type, ...args]);
   }
 
   on(type, listener) {
@@ -106,10 +110,6 @@ export default class Emitter {
 
   listenerCount(type) {
     return Emitter.listenerCount(this, type);
-  }
-
-  forwardEvents(emitter) {
-    this.onAny(emitter.emit.bind(emitter));
   }
 
   static listenerCount(emitter, type) {
