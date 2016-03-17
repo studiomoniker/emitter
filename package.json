@@ -1,7 +1,7 @@
 {
   "name": "@studiomoniker/emitter",
   "id": "emitter",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Browser / Node compatible ES6 event emitter loosely based on Node's implementation with added support for event forwarding and subscribing to all events.",
   "keywords": [
     "events",
