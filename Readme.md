@@ -58,12 +58,8 @@ Listen to all events:
 ```javascript
 import Emitter from '@studiomoniker/emitter';
 
-function logAll(eventName, message) {
-  console.log(`${eventName}: ${message}`);
-}
-
 const emitter = new Emitter();
-emitter.onAny(foo);
+emitter.onAny((eventName, message) => console.log(`${eventName}: ${message}`));
 emitter.emit('foo', 'bar'); // Logs 'foo: bar'
 emitter.emit('poo', 'bar'); // Logs 'poo: bar'
 ```
