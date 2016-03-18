@@ -109,14 +109,11 @@ export default class Emitter {
   }
 
   listenerCount(type) {
-    return Emitter.listenerCount(this, type);
+    return this.listeners(type).length
   }
 
   static listenerCount(emitter, type) {
-    const listeners = emitter.listeners(type);
-    return listeners
-      ? listeners.length
-      : 0;
+    return emitter.listenerCount(type);
   }
 }
 
