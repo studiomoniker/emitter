@@ -58,7 +58,7 @@ export default class Emitter {
     // adding it to the listeners, first emit "newListener".
     if (this._getListeners('newListener'))
       this.emit('newListener', type, listener);
-    let listeners = this._getListeners(type, true);
+    const listeners = this._getListeners(type, true);
     listeners.push(listener);
     return this;
   }
@@ -79,7 +79,7 @@ export default class Emitter {
   }
 
   off(type, listener) {
-    let removed = removeFromArray(this._getListeners(type), listener);
+    const removed = removeFromArray(this._getListeners(type), listener);
     if (removed && this._getEvents().removeListener)
       this.emit('removeListener', type, listener);
 
@@ -87,18 +87,18 @@ export default class Emitter {
   }
 
   listeners(type) {
-    let listeners = this._getListeners(type);
+    const listeners = this._getListeners(type);
     return listeners ? listeners.slice() : [];
   }
 
   removeAllListeners(type) {
-    let events = this._getEvents();
+    const events = this._getEvents();
     if (!type) {
       Object.keys(events)
         .forEach(type => this.removeAllListeners(type));
       return this;
     } else {
-      let listeners = this._getListeners(type);
+      const listeners = this._getListeners(type);
       if (!listeners) return;
       listeners
         .slice()
