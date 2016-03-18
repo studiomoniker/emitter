@@ -21,25 +21,25 @@ export default class Emitter {
     return any;
   }
 
-  emit(type) {
-    function emitListeners(listeners, type, args) {
+  emit(type, ...args) {
+    const emitListeners = (listeners, type, args) => {
       if (!listeners) return;
-      listeners.slice().forEach((listener, index) => {
-        if (listener._once) {
-          if (listener._fired)
-            return;
-          listeners.splice(index, 1);
-          listener._fired = true;
-        }
-        if (!!listener.emit) {
-          listener.emit.bind(listener).apply(that, [type, args]);
-        } else {
-          listener.apply(that, args);
-        }
-      });
+      listeners
+        .slice()
+        .forEach((listener, index) => {
+          if (listener._once) {
+            if (listener._fired)
+              return;
+            listeners.splice(index, 1);
+            listener._fired = true;
+          }
+          if (!!listener.emit) {
+            listener.emit(type, args);
+          } else {
+            listener.apply(this, args);
+          }
+        });
     }
-    const that = this;
-    const args = Array.prototype.slice.call(arguments, 1);
     const listeners = this._getListeners(type);
     // If there is no 'error' event listener then throw.
     if (type === 'error' && !listeners) {
